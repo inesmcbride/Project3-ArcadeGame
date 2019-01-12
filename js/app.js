@@ -30,15 +30,9 @@ Enemy.prototype.render = function() {
 // a handleInput() method.
 
 const Player = function() {
-    // Variables applied to each of our instances go here,
-    // we've provided one for you to get started
-
-    // The image/sprite for our enemies, this uses
-    // a helper we've provided to easily load images
-    this.sprite = 'images/enemy-bug.png';
-    //x pos
-    //y pos
-    //speed
+    this.sprite = 'images/char-boy.png';
+    this.x = 200;
+    this.y = 380;
 };
 
 // Update the enemy's position, required method for game
