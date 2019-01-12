@@ -6,8 +6,8 @@ const Enemy = function() {
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug.png';
-    //x pos
-    //y pos
+    this.x = 83;
+    this.y = 101;
     //speed
 };
 
