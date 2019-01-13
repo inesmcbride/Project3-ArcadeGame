@@ -41,14 +41,14 @@ Enemy.prototype.update = function(dt) {
     
 };
 
-const gameOver = function(){
+function gameOver(){
     //GameOver Modal
     const lost = document.querySelector('.winOrLoose');
     const endLives = document.querySelector('.endLives');
     const modal = document.querySelector('.modal');
     lost.innerHTML = 'You Lost';
     endLives.innerHTML = livesCounter;
-    modal.classList.remove('hide')
+    modal.classList.remove('hide');
 }
 
 // Draw the enemy on the screen, required method for game
@@ -60,7 +60,7 @@ Enemy.prototype.render = function() {
 // This class requires an update(), render() and
 // a handleInput() method.
 
-const Player = function() {
+const Player = function () {
     this.sprite = 'images/char-boy.png';
     this.x = 202;
     this.y = 394;
@@ -74,8 +74,15 @@ Player.prototype.update = function() {
     }
 };
 
-const gameWon = function(){
-    alert('Game Won');
+function gameWon(){
+    //Game won modal
+    const lost = document.querySelector('.winOrLoose');
+    const endLives = document.querySelector('.endLives');
+    const modal = document.querySelector('.modal');
+    lost.innerHTML = 'You Won!';
+    endLives.innerHTML = livesCounter;
+    modal.classList.remove('hide');
+    playAgainButton();
 }
 
 // Draw the enemy on the screen, required method for game
@@ -107,6 +114,24 @@ Player.prototype.handleInput = function(dt) {
         }
         break;
     }
+}
+
+function reset(){
+    const modal = document.querySelector('.modal');
+    const totalLives = document.querySelector('.lives');
+    modal.classList.add('hide');
+    player.x = 202;
+    player.y = 394;
+    Enemy.x = Math.floor(Math.random() * -300) - 101;
+    livesCounter = 10;
+    totalLives.innerHTML = livesCounter;
+}
+
+function playAgainButton(){
+  const playAgainButton = document.querySelector('.button');
+  playAgainButton.addEventListener('click', function(){
+    reset();
+  });
 }
 
 
