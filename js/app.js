@@ -1,4 +1,5 @@
-let livesCounter = 10;
+let livesCounter = 5;
+let resetX;
 
 // Enemies our player must avoid
 const Enemy = function(y) {
@@ -38,8 +39,7 @@ Enemy.prototype.update = function(dt) {
         gameOver();
     }
 
-    livesLeft();
-    
+    livesLeft();    
 };
 
 const livesLeft = function(){
@@ -121,14 +121,20 @@ const gameWon = function (){
     playAgainButton();
 }
 
+const changeX = function () {
+        allEnemies.forEach(function(enemy) {
+            enemy.x = Math.floor(Math.random() * -300) - 101;
+    });
+    }
+
 const reset = function (){
     const modal = document.querySelector('.modal');
     const totalLives = document.querySelector('.lives');
     modal.classList.add('hide');
     player.x = 202;
     player.y = 394;
-    Enemy.x = Math.floor(Math.random() * -300) - 101;
-    livesCounter = 10;
+    livesCounter = 5;
+    changeX();
     totalLives.innerHTML = livesCounter;
 }
 
