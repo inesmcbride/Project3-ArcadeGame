@@ -1,3 +1,5 @@
+let livesCounter = 10;
+
 // Enemies our player must avoid
 const Enemy = function(y) {
     // Variables applied to each of our instances go here,
@@ -10,7 +12,7 @@ const Enemy = function(y) {
     this.y = y;
     this.speed = Math.floor(Math.random() * 400) + 150;
 };
-let livesCounter = 10;
+
 // Update the enemy's position, required method for game
 // Parameter: dt, a time delta between ticks
 Enemy.prototype.update = function(dt) {
@@ -23,7 +25,8 @@ Enemy.prototype.update = function(dt) {
         this.x = Math.floor(Math.random() * -300) - 101;
         this.speed = Math.floor(Math.random() * 400) + 150;
     }
-    //check for collision
+
+    //check for collision & reset player
     if (player.y === this.y && (player.x > (this.x - 70) && player.x < (this.x + 70))){
         livesCounter --;
         player.x = 202;
@@ -35,20 +38,14 @@ Enemy.prototype.update = function(dt) {
         gameOver();
     }
 
-    //display lives left
-    const totalLives = document.querySelector('.lives');
-    totalLives.innerHTML = livesCounter;
+    livesLeft();
     
 };
 
-function gameOver(){
-    //GameOver Modal
-    const lost = document.querySelector('.winOrLoose');
-    const endLives = document.querySelector('.endLives');
-    const modal = document.querySelector('.modal');
-    lost.innerHTML = 'You Lost';
-    endLives.innerHTML = livesCounter;
-    modal.classList.remove('hide');
+const livesLeft = function(){
+    //display lives left
+    const totalLives = document.querySelector('.lives');
+    totalLives.innerHTML = livesCounter;
 }
 
 // Draw the enemy on the screen, required method for game
@@ -59,7 +56,6 @@ Enemy.prototype.render = function() {
 // Now write your own player class
 // This class requires an update(), render() and
 // a handleInput() method.
-
 const Player = function () {
     this.sprite = 'images/char-boy.png';
     this.x = 202;
@@ -73,17 +69,6 @@ Player.prototype.update = function() {
         gameWon();
     }
 };
-
-function gameWon(){
-    //Game won modal
-    const lost = document.querySelector('.winOrLoose');
-    const endLives = document.querySelector('.endLives');
-    const modal = document.querySelector('.modal');
-    lost.innerHTML = 'You Won!';
-    endLives.innerHTML = livesCounter;
-    modal.classList.remove('hide');
-    playAgainButton();
-}
 
 // Draw the enemy on the screen, required method for game
 Player.prototype.render = function() {
@@ -106,7 +91,6 @@ Player.prototype.handleInput = function(dt) {
         if (this.y > 0){
             this.y -= 83;
         }
-        //if Player his water, he has won - modal and game reset
         break;
         case'down':
         if (this.y < 332){
@@ -116,7 +100,28 @@ Player.prototype.handleInput = function(dt) {
     }
 }
 
-function reset(){
+const gameOver = function (){
+    //GameOver Modal
+    const lost = document.querySelector('.winOrLoose');
+    const endLives = document.querySelector('.endLives');
+    const modal = document.querySelector('.modal');
+    lost.innerHTML = 'You Lost';
+    endLives.innerHTML = livesCounter;
+    modal.classList.remove('hide');
+}
+
+const gameWon = function (){
+    //Game won modal
+    const lost = document.querySelector('.winOrLoose');
+    const endLives = document.querySelector('.endLives');
+    const modal = document.querySelector('.modal');
+    lost.innerHTML = 'You Won!';
+    endLives.innerHTML = livesCounter;
+    modal.classList.remove('hide');
+    playAgainButton();
+}
+
+const reset = function (){
     const modal = document.querySelector('.modal');
     const totalLives = document.querySelector('.lives');
     modal.classList.add('hide');
@@ -127,22 +132,18 @@ function reset(){
     totalLives.innerHTML = livesCounter;
 }
 
-function playAgainButton(){
+const playAgainButton = function (){
   const playAgainButton = document.querySelector('.button');
   playAgainButton.addEventListener('click', function(){
     reset();
   });
 }
 
-
-
-
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
 const allEnemies = [new Enemy(62), new Enemy(145), new Enemy(228)]
 const player = new Player ()
-
 
 
 // This listens for key presses and sends the keys to your
