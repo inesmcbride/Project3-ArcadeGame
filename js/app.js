@@ -10,7 +10,7 @@ const Enemy = function(y) {
     this.y = y;
     this.speed = Math.floor(Math.random() * 400) + 150;
 };
-
+let livesCounter = 10;
 // Update the enemy's position, required method for game
 // Parameter: dt, a time delta between ticks
 Enemy.prototype.update = function(dt) {
@@ -23,15 +23,26 @@ Enemy.prototype.update = function(dt) {
         this.x = Math.floor(Math.random() * -300) - 101;
         this.speed = Math.floor(Math.random() * 400) + 150;
     }
-
     //check for collision
     if (player.y === this.y && (player.x > (this.x - 70) && player.x < (this.x + 70))){
-        alert('collide');
+        livesCounter --;
         player.x = 202;
         player.y = 394;
     }
+
+    if(livesCounter == 0){
+        gameOver();
+    }
+
+    const totalLives = document.querySelector('.lives');
+    totalLives.innerHTML = livesCounter;
     
 };
+
+const gameOver = function(){
+    //GameOver Modal
+    alert('GameOver');
+}
 
 // Draw the enemy on the screen, required method for game
 Enemy.prototype.render = function() {
@@ -82,7 +93,6 @@ Player.prototype.handleInput = function(dt) {
         }
         break;
     }
-    console.log(this.y);
 }
 
 
