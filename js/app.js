@@ -9,7 +9,6 @@ const Enemy = function(y) {
     this.x = Math.floor(Math.random() * -300) - 101;
     this.y = y;
     this.speed = Math.floor(Math.random() * 400) + 150;
-    //speed
 };
 
 // Update the enemy's position, required method for game
@@ -23,6 +22,13 @@ Enemy.prototype.update = function(dt) {
     } else {
         this.x = Math.floor(Math.random() * -300) - 101;
         this.speed = Math.floor(Math.random() * 400) + 150;
+    }
+
+    //check for collision
+    if (player.y === this.y && (player.x > (this.x - 70) && player.x < (this.x + 70))){
+        alert('collide');
+        player.x = 202;
+        player.y = 394;
     }
     
 };
@@ -39,14 +45,11 @@ Enemy.prototype.render = function() {
 const Player = function() {
     this.sprite = 'images/char-boy.png';
     this.x = 202;
-    this.y = 380;
+    this.y = 394;
 };
 
-// Update the enemy's position, required method for game
-// Parameter: dt, a time delta between ticks
-Player.prototype.update = function(dt) {
 
-    //check for collision
+Player.prototype.update = function() {
     //check for win
 };
 
@@ -71,6 +74,7 @@ Player.prototype.handleInput = function(dt) {
         if (this.y > 0){
             this.y -= 83;
         }
+        //if Player his water, he has won - modal and game reset
         break;
         case'down':
         if (this.y < 332){
@@ -78,6 +82,7 @@ Player.prototype.handleInput = function(dt) {
         }
         break;
     }
+    console.log(this.y);
 }
 
 
