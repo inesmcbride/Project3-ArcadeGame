@@ -1,3 +1,8 @@
+/* Reviewed Matthew Carnford's Walkthrough guide (https://matthewcranford.com/arcade-game-walkthrough-part-6-collisions-win-conditions-and-game-resets/)
+and Ryan Waite's Walkthrough video (https://www.youtube.com/watch?v=XEVnMgYblGc&index=3&list=PLKC17wty6rS1XVZbRlWjYU0WVsIoJyO3s) 
+to help me with the project.
+*/
+
 let livesCounter = 5;
 let resetX;
 
