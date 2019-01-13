@@ -30,10 +30,12 @@ Enemy.prototype.update = function(dt) {
         player.y = 394;
     }
 
+    //check liveCounter for game over
     if(livesCounter == 0){
         gameOver();
     }
 
+    //display lives left
     const totalLives = document.querySelector('.lives');
     totalLives.innerHTML = livesCounter;
     
@@ -41,7 +43,12 @@ Enemy.prototype.update = function(dt) {
 
 const gameOver = function(){
     //GameOver Modal
-    alert('GameOver');
+    const lost = document.querySelector('.winOrLoose');
+    const endLives = document.querySelector('.endLives');
+    const modal = document.querySelector('.modal');
+    lost.innerHTML = 'You Lost';
+    endLives.innerHTML = livesCounter;
+    modal.classList.remove('hide')
 }
 
 // Draw the enemy on the screen, required method for game
@@ -62,7 +69,14 @@ const Player = function() {
 
 Player.prototype.update = function() {
     //check for win
+    if (this.y < 0){
+        gameWon();
+    }
 };
+
+const gameWon = function(){
+    alert('Game Won');
+}
 
 // Draw the enemy on the screen, required method for game
 Player.prototype.render = function() {
