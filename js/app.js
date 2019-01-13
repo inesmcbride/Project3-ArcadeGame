@@ -6,9 +6,9 @@ const Enemy = function(y) {
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug.png';
-    this.x = -101;
+    this.x = Math.floor(Math.random() * -300) - 101;
     this.y = y;
-    this.speed = Math.floor(Math.random() * 400) + 100;
+    this.speed = Math.floor(Math.random() * 400) + 150;
     //speed
 };
 
@@ -21,8 +21,8 @@ Enemy.prototype.update = function(dt) {
     if (this.x < 505){
         this.x += this.speed * dt;
     } else {
-        this.x = -101;
-        this.speed = Math.floor(Math.random() * 400) + 100;
+        this.x = Math.floor(Math.random() * -300) - 101;
+        this.speed = Math.floor(Math.random() * 400) + 150;
     }
     
 };
